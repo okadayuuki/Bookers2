@@ -1,0 +1,28 @@
+		<h1>User info</h1>
+		<table>
+			<tr style="border-bottom:1px solid #DDD; padding-bottom:1px;"><td><%= attachment_image_tag user, :profile_image, :fill,60,60, format:'jpeg', fallback:"no_image.jpg" %></td></tr>
+
+			<tr style="border-bottom:1px solid #DDD; padding-bottom:1px; "><th>name</th><td><%= user.name %></td></tr>
+			<tr style="border-bottom:1px solid #DDD; padding-bottom:1px;"><th>introduction</th><td><%= user.introduction %></td></tr>
+		</table>
+		<% if user.id == current_user.id %>
+			<%= link_to "", edit_user_path(user.id), class: "btn btn-default glyphicon glyphicon-wrench edit_user_22080 col-xs-12" %>
+		<% end %>
+		<h1>New book</h1>
+		<%= form_for(book) do |f| %>
+			<% if book.errors.any? %>
+				<div id="error_explanation">
+					<h4 class="text-danger"><%= book.errors.count %>erros prohibited this obj from being saved:</h4>
+					<ul>
+					<% book.errors.full_messages.each do |message| %>
+						<li class="text-danger"><%= message %></li>
+				    <% end %>
+					</ul>
+				</div>
+			<% end %>
+			 <p>Title</p>
+			<%= f.text_field :title,class:"col-xs-12" %>
+			<p>Opinion</p>
+			<%= f.text_area :body, class:"col-xs-12" %>
+			<%= f.submit "Create book", class: "btn btn-default container-fluid col-xs-12" %>
+		<% end %>
