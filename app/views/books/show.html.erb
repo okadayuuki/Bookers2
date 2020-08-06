@@ -1,23 +1,25 @@
 <%= flash[:success] %>
 <%= flash[:notice] %>
 <div class="container">
-	<div clss="row">
-		<div class="col-lg-3">
+	<div class="row">
+		<div class="col-xs-3">
 			<%= render 'books/list', book: @book, user: @user %>
 		</div>
-		<div class="col-lg-9">
+		<div class="col-xs-9">
 		<h1>Book detail</h1>
 		<table class="table table-striped">
 			<tr>
-				<td><%= attachment_image_tag @user, :profile_image, :fill, 50, 50, format:'jpeg', fallback:"no_image.jpg" %>
-					<br>
+				<td><%= link_to user_path(@user.id) do %>
+					<%= attachment_image_tag @user, :profile_image, :fill, 50, 50, format:'jpeg', fallback:"no_image.jpg" %>
+				<br>
 					<%= @user.name %>
+					<% end %>
 				</td>
 				<td><%= @books.title %></td>
 				<td><%= @books.body %></td>
 				<% if @user.id == current_user.id %>
 				<td><%= link_to "Edit", edit_book_path(@books.id) %></td>
-				<td><%= link_to "destroy", book_path(@books.id), method: :delete %></td>
+				<td><%= link_to "Destroy", book_path(@books.id), method: :delete %></td>
 				<% end %>
 			</tr>
 		</table>

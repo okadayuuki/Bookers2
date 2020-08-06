@@ -6,7 +6,7 @@
 			<%= form_for(@user) do |f| %>
 				<% if @user.errors.any? %>
 				<div id="error_explanation">
-					<h4 class="text-danger"><%= @user.errors.count %>erros prohibited this obj from being saved:</h4>
+					<h4 class="text-danger"><%= @user.errors.count %>errors prohibited this obj from being saved:</h4>
 					<ul>
 					<% @user.errors.full_messages.each do |message| %>
 						<li class="text-danger"><%= message %></li>
