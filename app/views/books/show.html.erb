@@ -17,11 +17,49 @@
 				</td>
 				<td><%= @books.title %></td>
 				<td><%= @books.body %></td>
+				<td><%= @books.book_comments.count %>件</td>
+				<% if @books.favorited_by?(current_user) %>
+				<td>
+					<%= link_to book_favorites_path(@books), method: :delete do %>
+						<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+						<%= @books.favorites.count %>いいね
+					<% end %>
+				</td>
+				<% else %>
+				<td>
+					<%= link_to book_favorites_path(@books), method: :post do %>
+						<i class="fa fa-heart" aria-hidden="true"></i>
+						<%= @books.favorites.count %>いいね
+					<% end %>
+				</td>
+				<% end %>
 				<% if @user.id == current_user.id %>
 				<td><%= link_to "Edit", edit_book_path(@books.id) %></td>
 				<td><%= link_to "Destroy", book_path(@books.id), method: :delete %></td>
 				<% end %>
 			</tr>
+			<tr>
+				<%= form_for [@books,@book_comment] do |f| %>
+				<td>
+					<%= f.text_area :comment %>
+					<%= f.submit "PostComment",class:"btn btn-default" %>
+				</td>
+				<% end %>
+			</tr>
+			<% @book_comments.each do |book_comment| %>
+			<tr>
+				<td>
+					<%= attachment_image_tag book_comment.user, :profile_image, :fill,30,30, format:'jpeg', fallback:"no_image.jpg" %>
+						<br>
+						<%= book_comment.user.name %>
+				</td>
+				<td><%= book_comment.comment %></td>
+				<% if book_comment.user == current_user %>
+					<td><%= link_to "delete", book_book_comment_path(book_comment,book_comment.book), method: :delete, class: "btn btn-danger" %>
+					</td>
+				<% end %>
+			</tr>
+			<% end %>
 		</table>
 		</div>
 	</div>

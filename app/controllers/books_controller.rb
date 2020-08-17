@@ -3,12 +3,16 @@ class BooksController < ApplicationController
   	@books = Book.all
   	@book = Book.new
   	@user = current_user
+    @book_comments = BookComment.all
   end
 
   def show
     @books = Book.find(params[:id])
     @book = Book.new
   	@user = User.find(@books.user_id)
+    @book_comment = BookComment.new
+    @book_comments = BookComment.all
+    
   end
 
   def create
