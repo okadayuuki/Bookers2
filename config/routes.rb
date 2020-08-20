@@ -6,7 +6,12 @@ Rails.application.routes.draw do
   	root to:'books#index'
   end
   root to:'home#top'
-  resources :users
+  resources :relationships, only: [:index, :create, :destroy]
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   resources :books do
   	resources :book_comments, only: [:create, :destroy]
   	resource :favorites, only: [:create, :destroy]

@@ -4,8 +4,16 @@
 
 			<tr style="border-bottom:1px solid #DDD; padding-bottom:1px; "><th>name</th><td><%= user.name %></td></tr>
 			<tr style="border-bottom:1px solid #DDD; padding-bottom:1px;"><th>introduction</th><td><%= user.introduction %></td></tr>
+			<tr style="border-bottom:1px solid #DDD; padding-bottom:1px;"><th>follows</th><td><%= link_to user.followings.count, following_user_path(user.id) %></td></tr>
+			<tr style="border-bottom:1px solid #DDD; padding-bottom:1px;"><th>followers</th><td><%= link_to user.followers.count, followers_user_path(user.id) %></td></tr>
 		</table>
 			<%= link_to "", edit_user_path(user.id), class: "btn btn-default glyphicon glyphicon-wrench edit_user_22080 col-xs-12" %>
+
+			<% if current_user != user%>
+			<%= render 'relationships/follow_button', user: @user %>
+			<% end %>
+
+
 		<h1>New book</h1>
 		<%= form_for(book) do |f| %>
 			<% if book.errors.any? %>
