@@ -13,7 +13,7 @@
   </head>
   <body>
     <header>
-      <div clss="container" style="padding-bottom:60px;">
+      <div clss="container" style="padding-bottom:100px;">
       <div class="row">
           <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: black;">
             <div class="container-fluid">
@@ -65,7 +65,22 @@
         <div class="col-lg-1"></div>
         <div>
     </header>
-    <%= render 'layouts/flash' %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-5">
+          <% if user_signed_in? %>
+            <div class="search">
+              <%= render 'searches/search' %>
+            </div>
+          <% end %>
+
+            <%= render 'layouts/flash' %>
+        </div>
+        <div class="col-xs-7"></div>
+      </div>
+    </div>
+
     <!-- /header -->
     <%= yield %>
     <footer>

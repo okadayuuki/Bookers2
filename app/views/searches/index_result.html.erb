@@ -1,0 +1,51 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10">
+			<% if @user_or_book == "1" %>
+				<h2>Users search for <%= "search" %></h2>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Image</th>
+							<th>Name</th>
+							<th>Intoduction</th>
+						</tr>
+					</thead>
+					<% @users.each do |user| %>
+					<tbody>
+						<tr>
+							<td><%= attachment_image_tag @user, :profile_image, format:'jpeg', fallback:'no_image.jpg' %>
+							</td>
+							<td><%= user.name %></td>
+							<td><%= user.introduction %></td>
+						</tr>
+					</tbody>
+					<% end %>
+				</table>
+			<% elsif @user_or_book == "2" %>
+				<h2>Books search for <%= 'search' %></h2>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Image</th>
+							<th>Title</th>
+							<th>Opinion</th>
+						</tr>
+					</thead>
+					<% @books.each do |book| %>
+					<tbody>
+						<tr>
+							<td><%= attachment_image_tag book.user, :profile_image, format:'jpeg', fallback:'no_image.jpg' %>
+							</td>
+							<td><%= book.title %></td>
+							<td><%= book.body %></td>
+						</tr>
+					</tbody>
+					<% end %>
+				</table>
+			<% end %>
+		</div>
+		<div class="col-xs-1"></div>
+	</div>
+</div>
